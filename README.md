@@ -41,7 +41,7 @@ gcloud container images delete gcr.io/$DEVSHELL_PROJECT_ID/gke-test-image:v1.0.0
 
 # TO DO :rocket:
 
-0. Spinnaker for CI/CD dev/stage/release
+0. Spinnaker for CI/CD dev/stage/release - Cloud Build
 
 1. Refactoring the code to JS 2017, update libraries
 
