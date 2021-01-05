@@ -6,7 +6,7 @@ metadata:
   labels:
     app: gke-test-deployment
 spec:
-  replicas: 2 #number of pods
+  replicas: 1 #number of pods
   selector:
     matchLabels:
       app: gke-test-deployment
