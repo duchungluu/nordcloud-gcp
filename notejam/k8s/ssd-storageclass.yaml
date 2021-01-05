@@ -6,4 +6,4 @@ provisioner: kubernetes.io/gce-pd
 parameters:
   type: pd-ssd
   fstype: ext4
-  replication-type: regional-pd
+  replication-type: regional-pd #duplicate in case 1 region fails

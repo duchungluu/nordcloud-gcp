@@ -1,6 +1,6 @@
 # Serverless Deployment on GCP
 
-## Tech stack: Node ExpressJs | Sqlite | Cloud Run | Terraform | Container Registry | Docker | GKE | Kubernetes
+## Tech stack: ExpressJs | Sqlite | Cloud Run | Container Registry | Docker | GKE | Kubernetes | Spinnaker | Terraform 
 
 ### Implementation:
 
@@ -9,11 +9,15 @@
 [![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2duchungluu%2nordcloud-gcp)
 
 0. Dockerfile to create Docker image, k8s yaml to create the container
-
-1. Create and push Docker image to Container Registry    
 ``` 
-gcloud builds submit --tag gcr.io/$DEVSHELL_PROJECT_ID/gke-test-image:v1 .
+npm install
+npm start
 ```
+1. Create and push Docker image to Container Registry (REPLACE $DEVSHELL_PROJECT_ID `nordcloud2021` with your current project ID)  
+``` 
+gcloud builds submit --tag gcr.io/nordcloud2021/gke-test-image:v1.0.0 .
+```
+`Update the image's path in ./k8s/deployment.yaml`
 2. Create new GKE cluster to run the web app
 ``` 
 gcloud container clusters create gke-test-cluster --disk-size 10 --num-nodes 2 --enable-autoscaling --min-nodes 2 --max-nodes 8 --zone europe-north1-a
@@ -22,17 +26,22 @@ gcloud container clusters create gke-test-cluster --disk-size 10 --num-nodes 2 -
 ```
 kubectl apply -f k8s/
 ```
+
+4. Check if the k8 is created and accessible. curl loadbalance-EXTERNAL-IP
+```
+kubectl get services
+```
 10. Clean Up :metal:
 ```
-    kubectl delete service gke-test-app
-    gcloud container clusters delete gke-test-cluster
-    gcloud container images delete gcr.io/$DEVSHELL_PROJECT_ID/gke-test-image:v1  --force-delete-tags --quiet
+kubectl delete service gke-test-app
+gcloud container clusters delete gke-test-cluster
+gcloud container images delete gcr.io/$DEVSHELL_PROJECT_ID/gke-test-image:v1.0.0  --force-delete-tags --quiet
 ```
 
 
 # TO DO :rocket:
 
-0. Spinnaker for CI/CD - try to do it if you have time
+0. Spinnaker for CI/CD dev/stage/release
 
 1. Refactoring the code to JS 2017, update libraries
 
