@@ -4,7 +4,7 @@ metadata:
   name: gke-test-pd
 spec:
   containers:
-  - image: gcr.io/nordcloud-300113/gke-test-image:v1
+  - image: gcr.io/nordcloud2021/gke-test-image:v1
     name: gke-test-container
     volumeMounts:
     - mountPath: /db

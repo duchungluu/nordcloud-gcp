@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: gke-test-image
-          image: gcr.io/nordcloud2021/gke-test-image:v1.0.0
+          image: gcr.io/[PROJECT_ID]/gke-test-image:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
