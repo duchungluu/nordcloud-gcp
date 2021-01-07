@@ -6,22 +6,22 @@
 
 > Preq :monocle_face: : GCP service account, Docker, K8s, node, editor
 
-[![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2duchungluu%2nordcloud-gcp)
+[![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor)
 
 0. Dockerfile to create Docker image, k8s yaml to create the container
 ``` 
 npm install
 npm start
 ```
-1. Create and push Docker image to Container Registry (REPLACE $DEVSHELL_PROJECT_ID `nordcloud2021` with your current project ID)  
+1. Create and push a Docker image to the Container Registry (REPLACE $DEVSHELL_PROJECT_ID `nordcloud2021` with your current project ID)  
 ``` 
 gcloud builds submit --tag gcr.io/nordcloud2021/gke-test-image:v1.0.0 .
 ```
-2. Create new GKE cluster to run the web app
+2. Create a new GKE cluster to run the web app
 ``` 
 gcloud container clusters create gke-test-cluster --disk-size 10 --num-nodes 2 --enable-autoscaling --min-nodes 2 --max-nodes 8 --zone europe-north1-a
 ```
-3. Apply Kubernetes services
+3. Apply Kubernetes services. (REPLACE $DEVSHELL_PROJECT_ID `nordcloud2021` with your current project ID in /k8s/deployment.yaml)  
 ```
 kubectl apply -f k8s/
 ```
@@ -29,6 +29,11 @@ kubectl apply -f k8s/
 4. Check if the k8 is created and accessible. curl loadbalance_EXTERNAL-IP
 ```
 kubectl get services
+```
+
+5. Check the log if the container does not work, reasons can be it is creating, invalid params, VPC blocked ports, missing IAM rights.
+```
+https://console.cloud.google.com/logs/
 ```
 10. Clean Up :metal:
 ```
@@ -40,15 +45,15 @@ gcloud container images delete gcr.io/$DEVSHELL_PROJECT_ID/gke-test-image:v1.0.0
 
 # TO DO :rocket:
 
-0. Spinnaker for CI/CD dev/stage/release - Cloud Build
+0. Spinnaker for dev/stage/release; canary, blue/green deployment || Cloud Build for CI/CD 
 
-1. Refactoring the code to JS 2017, update libraries
+1. Terraform to provision the whole thing
 
 2. Deprecate Sqlite, not scalable, use GCP Cloud SQL in the private VPC.
 
-3. Use microservices instead of monolith. Frontend, authentication, notes.
+3. Refactoring the code to JS 2017, update libraries
 
-4. More automation
+4. Use microservices instead of monolith. Frontend, authentication, notes.
 
 #  Hung Luu
 

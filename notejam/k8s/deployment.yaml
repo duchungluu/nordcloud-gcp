@@ -6,7 +6,7 @@ metadata:
   labels:
     app: gke-test-deployment
 spec:
-  replicas: 3 #number of pods
+  replicas: 2 #number of pods
   selector:
     matchLabels:
       app: gke-test-deployment
@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
         - name: gke-test-image
-          image: gcr.io/[PROJECT_ID]/gke-test-image:latest
+          image: gcr.io/nordcloud2021/gke-test-image:v1.0.0
+          #image: gcr.io/[PROJECT_ID]/gke-test-image:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
