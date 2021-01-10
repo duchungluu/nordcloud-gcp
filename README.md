@@ -40,6 +40,15 @@ kubectl get services
 ```
 https://console.cloud.google.com/logs/
 ```
+7. Create Continous Deployment pipeline with Cloud Build
+```
+gcloud beta builds triggers create github \
+    --repo-name=[REPO_NAME] \
+    --repo-owner=[REPO_OWNER] \
+    --branch-pattern=".*" \
+    --tag-pattern=[DEV\RELEASE] \
+    --build-config=cloudbuild.yaml \
+```
 10. Clean Up :metal:
 ```
 kubectl delete service gke-test-app
@@ -50,7 +59,7 @@ gcloud container images delete gcr.io/$DEVSHELL_PROJECT_ID/gke-test-image:v1.0.0
 
 # TO DO :rocket:
 
-0. Spinnaker for dev/stage/release; canary, blue/green deployment || Cloud Build for CI/CD 
+0. Spinnaker for dev/stage/release; canary, blue/green deployment 
 
 1. Terraform to provision the whole thing
 
