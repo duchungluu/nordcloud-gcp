@@ -6,7 +6,6 @@
 
 > Preq :monocle_face: : GCP service account, Docker, K8s, Node, Cloud Shell, editor
 
-[![Go to Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor)
 
 0. Dockerfile to create Docker image, k8s yaml to create the container
 ``` 
@@ -16,10 +15,12 @@ npm start
 1. Set project ID and enable Cloud Shell APIs
 ```
 gcloud config set project [$DEVSHELL_PROJECT_ID]
+
+Enable Cloud Shell APIs
 ```
 [![Enable the APIs](http://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/flows/enableapi?apiid=container,cloudbuild.googleapis.com,sourcerepo.googleapis.com&_ga=2.185517153.956019484.1610277110-628287784.1609161758)
+
 2. Create and push a Docker image to the Container Registry (REPLACE $DEVSHELL_PROJECT_ID `nordcloud2021` with your current project ID)  
-````
 ``` 
 gcloud builds submit --tag gcr.io/nordcloud2021/gke-test-image:v1.0.0 .
 ```

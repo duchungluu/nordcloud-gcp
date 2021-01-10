@@ -51,6 +51,7 @@ steps:
     id: Apply deploy
 images:
   - '$_IMAGE_NAME:$COMMIT_SHA'
+timeout: 660s
 options:
   substitutionOption: ALLOW_LOOSE
 substitutions:
