@@ -17,3 +17,5 @@ spec:
       resource:
         name: cpu
         targetAverageUtilization: 80
+
+# ScheduledScaler if required to scale within specific hours
