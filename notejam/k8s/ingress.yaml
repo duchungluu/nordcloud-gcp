@@ -3,9 +3,9 @@ kind: "Ingress"
 metadata:
   name: "gke-test-ingress"
   namespace: "default"
-  annotations:
-    kubernetes.io/ingress.global-static-ip-name: "gke-test-ip"
+  #annotations:
+  #  kubernetes.io/ingress.global-static-ip-name: "gke-test-ip"
 spec:
   backend:
     serviceName: "gke-test-deployment"
-    servicePort: 3000
+    servicePort: 80

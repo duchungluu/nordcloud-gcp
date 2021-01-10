@@ -4,34 +4,38 @@
 
 ### Implementation:
 
-> Preq :monocle_face: : GCP service account, Docker, K8s, node, editor
+> Preq :monocle_face: : GCP service account, Docker, K8s, Node, Cloud Shell, editor
 
-[![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor)
+[![Go to Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/cloudshell/editor)
 
 0. Dockerfile to create Docker image, k8s yaml to create the container
 ``` 
 npm install
 npm start
 ```
-1. Create and push a Docker image to the Container Registry (REPLACE $DEVSHELL_PROJECT_ID `nordcloud2021` with your current project ID)  
+1. Set project ID and enable Cloud Shell APIs
+```
+gcloud config set project [$DEVSHELL_PROJECT_ID]
+```
+[![Enable the APIs](http://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/flows/enableapi?apiid=container,cloudbuild.googleapis.com,sourcerepo.googleapis.com&_ga=2.185517153.956019484.1610277110-628287784.1609161758)
+2. Create and push a Docker image to the Container Registry (REPLACE $DEVSHELL_PROJECT_ID `nordcloud2021` with your current project ID)  
+````
 ``` 
 gcloud builds submit --tag gcr.io/nordcloud2021/gke-test-image:v1.0.0 .
 ```
-2. Create a new GKE cluster to run the web app
+3. Create a new GKE cluster to run the web app
 ``` 
 gcloud container clusters create gke-test-cluster --disk-size 10 --num-nodes 2 --enable-autoscaling --min-nodes 2 --max-nodes 8 --zone europe-north1-a
 ```
-3. Apply Kubernetes services. (REPLACE $DEVSHELL_PROJECT_ID `nordcloud2021` with your current project ID in /k8s/deployment.yaml)  
+4. Apply Kubernetes services. (REPLACE $DEVSHELL_PROJECT_ID `nordcloud2021` with your current project ID in /k8s/deployment.yaml)  
 ```
 kubectl apply -f k8s/
 ```
-
-4. Check if the k8 is created and accessible. curl loadbalance_EXTERNAL-IP
+5. Check if the k8 is created and accessible. curl loadbalance_EXTERNAL-IP
 ```
 kubectl get services
 ```
-
-5. Check the log if the container does not work, reasons can be it is creating, invalid params, VPC blocked ports, missing IAM rights.
+6. Check the log if the container does not work, reasons can be it is creating, invalid params, VPC blocked ports, missing IAM rights.
 ```
 https://console.cloud.google.com/logs/
 ```
